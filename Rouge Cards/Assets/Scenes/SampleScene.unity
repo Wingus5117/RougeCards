@@ -149,18 +149,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapBiome: 0
-  TileMap_WidthBounds: {x: 0, y: 0}
-  TileMap_LengthBounds: {x: 0, y: 0}
+  PlainsData: {fileID: 376986513805789059, guid: ba38660fe98885d4da6980c7f62d5c1d, type: 3}
+  TileMap_WidthBounds: {x: 5, y: 10}
+  TileMap_LengthBounds: {x: 5, y: 10}
   Seed: 0
   Tile: {fileID: 412081635025885745, guid: 1076de9845cc2da48be4026f88354bc4, type: 3}
   GrassMaterial: {fileID: 2100000, guid: 5359338562e7baf4eabf975591af623f, type: 2}
   MountainMaterial: {fileID: 2100000, guid: bde0b99a508eb194e9c8748b4bf28658, type: 2}
   WaterMaterial: {fileID: 2100000, guid: 630d6c7156b7dbe44b8e2c4ac86b84dd, type: 2}
-  TileAmount: 100
+  TileAmount: 0
   BaseTilesGenerated: 0
   MainTileTypePlaced: 0
   SecondaryTileTypePlaced: 0
   TertiaryTileTypePlaced: 0
+  primarytileBudget: 0
+  secondarytileBudget: 0
+  tertiarytileBudget: 0
 --- !u!4 &560180204
 Transform:
   m_ObjectHideFlags: 0

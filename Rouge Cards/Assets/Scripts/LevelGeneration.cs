@@ -17,6 +17,7 @@ public enum MapBiome
 public class LevelGeneration : MonoBehaviour
 {
     public MapBiome MapBiome;
+    public BiomeData PlainsData;
     
     public Vector2 TileMap_WidthBounds;
     public Vector2 TileMap_LengthBounds;
@@ -37,6 +38,10 @@ public class LevelGeneration : MonoBehaviour
     public bool SecondaryTileTypePlaced;
     public bool TertiaryTileTypePlaced;
 
+    public float primarytileBudget;
+    public float secondarytileBudget;
+    public float tertiarytileBudget;
+
     // Update is called once per frame
     void Update()
     {
@@ -45,6 +50,20 @@ public class LevelGeneration : MonoBehaviour
             GenerateMap();
         }
     }
+    public IEnumerator GenerateMap()
+    {
+        
+        GenerateBaseTileMap();
+        DetermineTilebudgets();
+        while (!BaseTilesGenerated)
+        {
+            return null;
+        }
+        Debug.Log("BaseTilesPlaced");
+        
+        return null;
+    }
+    
     public void GenerateBaseTileMap()
     {
         //Reset
@@ -82,10 +101,10 @@ public class LevelGeneration : MonoBehaviour
                 TileList_Width[i].Add(Tile);
                 
                 GameObject tile = Instantiate(Tile,  new Vector3(j,0,i), Quaternion.identity, transform);
-                
-                //sets the type of tile (get rid of this and set tile types in a seperate passthrough)
-                MeshRenderer mr = tile.GetComponent<MeshRenderer>();
-                mr.material = GrassMaterial;
+
+
+                //Sets the current tile to the biomes base tile
+                SetPrimaryTileType(tile);
 
                 //this commented out section would make each tile randomly water, mountain or grass material
                 /*int tiletypevalue = UnityEngine.Random.Range(1, 11);
@@ -110,15 +129,34 @@ public class LevelGeneration : MonoBehaviour
         BaseTilesGenerated = true;
        
     }
-    public IEnumerator GenerateMap()
+
+    public void SetPrimaryTileType(GameObject tile)
     {
-        GenerateBaseTileMap();
-        while (!BaseTilesGenerated)
+        // set the given tile to the default tile type for the given biome
+        MeshRenderer mr = tile.GetComponent<MeshRenderer>();
+        mr.material = GrassMaterial;
+    }
+    public void DetermineTilebudgets()
+    {
+        BiomeData MapBiomeData = null;
+        if (MapBiome == MapBiome.Plains)
         {
-            return null;
+            MapBiomeData = PlainsData;
         }
-        Debug.Log("BaseTilesPlaced");
-        return null;
+
+        primarytileBudget = TileAmount * (MapBiomeData.GrassBudget / 100);
+        primarytileBudget = Mathf.FloorToInt(primarytileBudget);
+        
+        secondarytileBudget = TileAmount * (MapBiomeData.WaterBudget / 100);
+        secondarytileBudget = Mathf.FloorToInt(secondarytileBudget);
+        
+        tertiarytileBudget = TileAmount * (MapBiomeData.MountainBudget / 100);
+        tertiarytileBudget = Mathf.FloorToInt(tertiarytileBudget);
+
+    }
+    public void SetSecondarytileType()
+    { 
+        
     }
     
     public void CheckNearbyTiles(int SearchRange, String TileTypeToSearchFor)
@@ -132,10 +170,8 @@ public class LevelGeneration : MonoBehaviour
         if (test == TileTypeToSearchFor)
         {
             Debug.Log("Found A Water Tile");
-            
         }
     }
-
 }
 
 
