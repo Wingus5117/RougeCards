@@ -406,9 +406,11 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.54f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.54f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.54f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-"Assets/Scripts/BiomeData.cs"
-"Assets/Scripts/LevelGeneration.cs"
-"Assets/Scripts/TileData.cs"
+"Assets/Scripts/gameObjects/Unit.cs"
+"Assets/Scripts/Map generation/BiomeData.cs"
+"Assets/Scripts/Map generation/LevelGeneration_Plains.cs"
+"Assets/Scripts/Map generation/TileData.cs"
+"Assets/Scripts/Player/Player Manager.cs"
 -langversion:9.0
 /deterministic
 /optimize+
