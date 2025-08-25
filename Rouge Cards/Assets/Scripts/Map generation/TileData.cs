@@ -21,68 +21,42 @@ public class TileData : MonoBehaviour
     {
         LevelGeneration_Plains = FindAnyObjectByType<LevelGeneration_Plains>();
     }
-    public IEnumerator GenerateNavigationMapOrigin()
-    {
-        yield return new WaitForSeconds(.001f);
-        NavigationValue = 0;
-        NavigationSet = true;
-
-        // Get neighbors fresh for this step
-        List<TileData> neighbors = GetNeighbors();
-
-        foreach (TileData tile in neighbors)
-        {
-            if (!tile.NavigationSet)
-            {
-                Debug.Log("Setting " + tile.name);
-                tile.NavigationSet = true;
-                tile.NavigationValue = NavigationValue + 1;
-                StartCoroutine(tile.generateNavigationMapCont());
-            }
-        }
-    }
-
-    public IEnumerator generateNavigationMapCont()
-    {
-        yield return new WaitForSeconds(.001f);
-
-        // Fresh neighbor list every time
-        List<TileData> neighbors = GetNeighbors();
-
-        foreach (TileData tile in neighbors)
-        {
-            if (!tile.NavigationSet)
-            {
-                Debug.Log("Setting " + tile.name);
-                tile.NavigationSet = true;
-                tile.NavigationValue = NavigationValue + 1;
-                StartCoroutine(tile.generateNavigationMapCont());
-            }
-        }
-    }
+    
 
     // Helper to get adjacent neighbors
-    private List<TileData> GetNeighbors()
+    internal List<TileData> GetNeighbors()
     {
         List<TileData> result = new List<TileData>();
 
-        for (int i = 0; i < LevelGeneration_Plains.TileList_Width.Count; i++)
+        int x = Xposition.ConvertTo<int>();
+        int y = Yposition.ConvertTo<int>();
+
+        // Grid dimensions
+        int width = LevelGeneration_Plains.TileList_Width.Count;
+        int height = LevelGeneration_Plains.TileList_Width[0].Count;
+
+        // Define offsets for 4 directions: up, down, left, right
+        int[,] directions = new int[,]
         {
-            for (int j = 0; j < LevelGeneration_Plains.TileList_Width[i].Count; j++)
+        { 0, 1 },  // Up
+        { 0, -1 }, // Down
+        { 1, 0 },  // Right
+        { -1, 0 }  // Left
+        };
+
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = x + directions[i, 0];
+            int newY = y + directions[i, 1];
+
+            // Bounds check
+            if (newX >= 0 && newX < width && newY >= 0 && newY < height)
             {
-                TileData data = LevelGeneration_Plains.TileList_Width[i][j].GetComponent<TileData>();
-
-                if (data.Xposition == Xposition + 1 && data.Yposition == Yposition)
-                    result.Add(data);
-
-                if (data.Xposition == Xposition - 1 && data.Yposition == Yposition)
-                    result.Add(data);
-
-                if (data.Xposition == Xposition && data.Yposition == Yposition + 1)
-                    result.Add(data);
-
-                if (data.Xposition == Xposition && data.Yposition == Yposition - 1)
-                    result.Add(data);
+                TileData neighbor = LevelGeneration_Plains.TileList_Width[newX][newY].GetComponent<TileData>();
+                if (neighbor != null)
+                {
+                    result.Add(neighbor);
+                }
             }
         }
 

@@ -41,6 +41,8 @@ public class PlayerManager : MonoBehaviour
                         GamePlayObject gameplayobject = SelectedObject.GetComponent<GamePlayObject>();
                         TileData data = hit.collider.gameObject.GetComponent<TileData>();
                         gameplayobject.Move(data);
+                        gameplayobject.isSelected = false;
+                        SelectedObject = hit.collider.gameObject;
                     }
                 }
                 else if (hit.collider.gameObject.tag == "GamePlayObject")
