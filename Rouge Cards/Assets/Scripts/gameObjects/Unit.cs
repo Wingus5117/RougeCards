@@ -9,6 +9,7 @@ public class GamePlayObject : MonoBehaviour
     public TileData TilePosition;
     private NavigationMapGenerator NavigationMapgenerator;
     private bool ismoving;
+    public bool isFlying;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +43,7 @@ public class GamePlayObject : MonoBehaviour
     }
     public void Select()
     {
+        UpdateTilePosition();
         isSelected = true;
         
     }
@@ -126,10 +128,13 @@ public class GamePlayObject : MonoBehaviour
         {
             NavigationMapgenerator.clearalltiles();
             Debug.Log("StopMoving");
+
         }
     }
     public void generateNavigationGrid(TileData destination)
     {
+        //make sure the navigation map generator knows if the unit that is trying to move can fly or not
+        NavigationMapgenerator.CurrentUnitisFlying = isFlying;
         NavigationMapgenerator.GenerateNavigationMap(destination);
     }
 }

@@ -7,6 +7,7 @@ public class NavigationMapGenerator : MonoBehaviour
     private List<TileData> nexttileDatas;
     private float currentnavigationalvalue;
     private LevelGeneration_Plains levelgenerator;
+    internal bool CurrentUnitisFlying;
 
     private void Start()
     {
@@ -43,9 +44,18 @@ public class NavigationMapGenerator : MonoBehaviour
                 {
                     if (!neighbor.NavigationSet)
                     {
-                        neighbor.NavigationSet = true;
-                        neighbor.NavigationValue = tile.NavigationValue + 1;
-                        nexttileDatas.Add(neighbor);
+                        if (CurrentUnitisFlying)
+                        {
+                            neighbor.NavigationSet = true;
+                            neighbor.NavigationValue = tile.NavigationValue + 1;
+                            nexttileDatas.Add(neighbor);
+                        }
+                        else if (neighbor.Terraintype.ToString() == "Grass" || neighbor.Terraintype.ToString() == "Mana")
+                        {
+                            neighbor.NavigationSet = true;
+                            neighbor.NavigationValue = tile.NavigationValue + 1;
+                            nexttileDatas.Add(neighbor);
+                        }
                     }
                 }
             }

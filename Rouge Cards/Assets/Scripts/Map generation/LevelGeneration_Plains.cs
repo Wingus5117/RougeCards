@@ -101,8 +101,6 @@ public class LevelGeneration_Plains : MonoBehaviour
             //add to each list the amount of tiles in the width
             for (int j = 0; j < TileMap_Length; j++)
             {
-                
-                
                 GameObject tile = Instantiate(Tile,  new Vector3(j,0,i), Quaternion.identity, transform);
 
                 TileList_Width[i].Add(tile);
@@ -164,8 +162,6 @@ public class LevelGeneration_Plains : MonoBehaviour
         
         tertiaryTileBudget = TileAmount * (MapBiomeData.MountainBudget / 100);
         tertiaryTileBudget = Mathf.FloorToInt(tertiaryTileBudget);
-
-
     }
     public void PlaceSecondarytileType()
     {
@@ -175,20 +171,6 @@ public class LevelGeneration_Plains : MonoBehaviour
             // find an edge tile
             // place a water tile on a random one
             // 
-        }
-    }
-    
-    public void CheckNearbyTiles(int SearchRange, String TileTypeToSearchFor)
-    {
-        // this enum will be retrived from the tiles that are being searched
-        Enum TileType;
-        // convert the found tiles type to a string
-        string test = nameof(TileType);
-       
-        // check to see if that string is the one we are searching for
-        if (test == TileTypeToSearchFor)
-        {
-            Debug.Log("Found A Water Tile");
         }
     }
 }
