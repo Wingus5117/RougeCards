@@ -73,6 +73,8 @@ searchItemFavorites = [
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
 hideTabs = false
+indexOnEditorStartup = true
+logIndexingPerformanceReport = false
 expandedQueries = [
 ]
 queryBuilder = true
@@ -81,3 +83,4 @@ helperWidgetCurrentArea = "all"
 disabledIndexers = ""
 minIndexVariations = 2
 findProviderIndexHelper = true
+itemIconSize = 32
