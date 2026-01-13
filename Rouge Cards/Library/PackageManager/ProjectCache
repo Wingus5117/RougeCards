@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639037697809687698
-    m_Hash: 1546021581
+      ticks: 639038610007807424
+    m_Hash: 889767625
   m_LockFileStatus:
     m_FilePath: C:/Users/bs353321/Documents/GitHub/RougeCards/Rouge Cards/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639037698088877900
-    m_Hash: 4042778023
+      ticks: 639038610007818530
+    m_Hash: 2196742323
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:

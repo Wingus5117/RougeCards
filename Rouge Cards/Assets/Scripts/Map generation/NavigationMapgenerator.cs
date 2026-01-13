@@ -6,12 +6,12 @@ public class NavigationMapGenerator : MonoBehaviour
     private List<TileData> currenttileDatas;
     private List<TileData> nexttileDatas;
     private float currentnavigationalvalue;
-    private LevelGeneration_Plains levelgenerator;
+    private MapManager levelgenerator;
     internal bool CurrentUnitisFlying;
 
     private void Start()
     {
-        levelgenerator = FindAnyObjectByType<LevelGeneration_Plains>();
+        levelgenerator = FindAnyObjectByType<MapManager>();
     }
     public void GenerateNavigationMap(TileData destination)
     {
@@ -19,7 +19,6 @@ public class NavigationMapGenerator : MonoBehaviour
         nexttileDatas = new List<TileData>();
         currentnavigationalvalue = 0;
 
-        // Reset all tiles if needed (optional: do this in a manager class)
 
         // Initialize destination tile
         destination.NavigationValue = 0;

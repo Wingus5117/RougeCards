@@ -14,12 +14,12 @@ public class TileData : MonoBehaviour
     public float NavigationValue;
     public bool NavigationSet = false;
 
-    internal LevelGeneration_Plains LevelGeneration_Plains;
+    internal MapManager Mapmanager;
     private List<TileData> _tiles = new List<TileData>();
 
     public void OnEnable()
     {
-        LevelGeneration_Plains = FindAnyObjectByType<LevelGeneration_Plains>();
+        Mapmanager = FindAnyObjectByType<MapManager>();
     }
     
 
@@ -32,8 +32,8 @@ public class TileData : MonoBehaviour
         int y = Yposition.ConvertTo<int>();
 
         // Grid dimensions
-        int width = LevelGeneration_Plains.TileList_Width.Count;
-        int height = LevelGeneration_Plains.TileList_Width[0].Count;
+        int width = Mapmanager.TileList_Width.Count;
+        int height = Mapmanager.TileList_Width[0].Count;
 
         // Define offsets for 4 directions: up, down, left, right
         int[,] directions = new int[,]
@@ -52,7 +52,7 @@ public class TileData : MonoBehaviour
             // Bounds check
             if (newX >= 0 && newX < width && newY >= 0 && newY < height)
             {
-                TileData neighbor = LevelGeneration_Plains.TileList_Width[newX][newY].GetComponent<TileData>();
+                TileData neighbor = Mapmanager.TileList_Width[newX][newY].GetComponent<TileData>();
                 if (neighbor != null)
                 {
                     result.Add(neighbor);
