@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
-public class EnemyUnit : MonoBehaviour
+public class PlayerUnit : MonoBehaviour
 {
-    //public bool isSelected;
+    public bool isSelected;
     public TileData TilePosition;
     private NavigationMapGenerator NavigationMapgenerator;
     private bool ismoving;
@@ -46,6 +46,16 @@ public class EnemyUnit : MonoBehaviour
             tiledata.ObjectOnTile = gameObject;
             TilePosition = tiledata;
         }
+    }
+    public void Select()
+    {
+
+        UpdateTilePosition();
+        isSelected = true;
+    }
+    public void UnSelect()
+    {
+        isSelected = false;
     }
     public void Move(TileData destination)
     {
