@@ -8,6 +8,7 @@ public class NavigationMapGenerator : MonoBehaviour
     private float currentnavigationalvalue;
     private MapManager levelgenerator;
     internal bool CurrentUnitisFlying;
+    public TurnManager TurnManager;
 
     private void Start()
     {
@@ -43,17 +44,36 @@ public class NavigationMapGenerator : MonoBehaviour
                 {
                     if (!neighbor.NavigationSet)
                     {
+                        // if unit can fly add all tiles to the navigation grid
                         if (CurrentUnitisFlying)
                         {
                             neighbor.NavigationSet = true;
                             neighbor.NavigationValue = tile.NavigationValue + 1;
                             nexttileDatas.Add(neighbor);
                         }
+                        // check if the next tile is walkable for non flying units
                         else if (neighbor.Terraintype.ToString() == "Grass" || neighbor.Terraintype.ToString() == "Mana")
                         {
-                            neighbor.NavigationSet = true;
-                            neighbor.NavigationValue = tile.NavigationValue + 1;
-                            nexttileDatas.Add(neighbor);
+                            if (TurnManager.isPlayerTurn)
+                            {
+                                if (!neighbor.hasEnemyEntity)
+                                {
+                                    neighbor.NavigationSet = true;
+                                    neighbor.NavigationValue = tile.NavigationValue + 1;
+                                    nexttileDatas.Add(neighbor);
+                                }
+                            }
+                            if (TurnManager.isEnemyTurn)
+                            {
+                                if (!neighbor.hasPlayerEntity)
+                                {
+                                    neighbor.NavigationSet = true;
+                                    neighbor.NavigationValue = tile.NavigationValue + 1;
+                                    nexttileDatas.Add(neighbor);
+                                }
+                            }
+                            // if the tile has an enemy on it dont add it to the navigation grid
+                            
                         }
                     }
                 }

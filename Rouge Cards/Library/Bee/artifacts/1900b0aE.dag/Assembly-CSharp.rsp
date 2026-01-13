@@ -435,17 +435,16 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.2f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.2f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.2f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-"Assets/Scripts/gameObjects/EnemyUnit.cs"
-"Assets/Scripts/gameObjects/PlayerUnit.cs"
 "Assets/Scripts/LevelManagers/LevelManager.cs"
 "Assets/Scripts/LevelManagers/TurnManager.cs"
-"Assets/Scripts/Map generation/BiomeData.cs"
 "Assets/Scripts/Map generation/MapManager.cs"
 "Assets/Scripts/Map generation/NavigationMapgenerator.cs"
 "Assets/Scripts/Map generation/TileData.cs"
 "Assets/Scripts/Map generation/TileMapData.cs"
 "Assets/Scripts/Player-Enemy/EnemyManager.cs"
 "Assets/Scripts/Player-Enemy/Player Manager.cs"
+"Assets/Scripts/TileBoundEntities/EnemyUnit.cs"
+"Assets/Scripts/TileBoundEntities/PlayerUnit.cs"
 -langversion:9.0
 /deterministic
 /optimize+

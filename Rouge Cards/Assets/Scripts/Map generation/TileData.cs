@@ -10,6 +10,8 @@ public class TileData : MonoBehaviour
     public float Xposition;
     public float Yposition;
     public GameObject ObjectOnTile;
+    public bool hasEnemyEntity;
+    public bool hasPlayerEntity;
 
     public float NavigationValue;
     public bool NavigationSet = false;
