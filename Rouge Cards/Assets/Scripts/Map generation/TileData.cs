@@ -18,12 +18,14 @@ public class TileData : MonoBehaviour
 
     internal MapManager Mapmanager;
     private List<TileData> _tiles = new List<TileData>();
+    //internal bool IndicatorSet;
+    //public Renderer WalkIndicator;
 
     public void OnEnable()
     {
         Mapmanager = FindAnyObjectByType<MapManager>();
     }
-    
+
 
     // Helper to get adjacent neighbors
     internal List<TileData> GetNeighbors()
@@ -64,6 +66,17 @@ public class TileData : MonoBehaviour
 
         return result;
     }
+
+    /*public void TurnOnIndicator(Material IndicatorMaterial)
+    {
+        //Red, attack
+        //Blue, move
+        //Purple, both
+        IndicatorSet = true;
+        WalkIndicator.gameObject.SetActive(true);
+        WalkIndicator.material = IndicatorMaterial;
+    }*/
+
 }
 public enum TerrainType
 {

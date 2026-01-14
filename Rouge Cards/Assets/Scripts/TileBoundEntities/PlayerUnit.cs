@@ -15,6 +15,8 @@ public class PlayerUnit : MonoBehaviour
     public string UnitName;
     public float ManaCost;
     public float Movement;
+    public float MovementPoints;
+    public float ActionPoints;
     public float MaxHealth;
     public float CurrentHealth;
     public float Damage;
@@ -49,9 +51,9 @@ public class PlayerUnit : MonoBehaviour
     }
     public void Select()
     {
-
         UpdateTilePosition();
         isSelected = true;
+        //NavigationMapgenerator.HighlightValidTiles(TilePosition);
     }
     public void UnSelect()
     {
@@ -89,10 +91,9 @@ public class PlayerUnit : MonoBehaviour
         if (bestNeighbor != null)
         {
 
-
             // Move the object 1 unit toward the best neighbor tile
             StartCoroutine(MoveToTile(bestNeighbor, destination));
-
+            MovementPoints--;
             // Update the new tile
             TilePosition = bestNeighbor;
         }
@@ -143,7 +144,7 @@ public class PlayerUnit : MonoBehaviour
     {
         //make sure the navigation map generator knows if the unit that is trying to move can fly or not
         NavigationMapgenerator.CurrentUnitisFlying = isFlying;
-        NavigationMapgenerator.GenerateNavigationMap(destination);
+        NavigationMapgenerator.GenerateNavigationMap(destination, TilePosition);
     }
 
     public void TakeDamage(float Damagetaken)

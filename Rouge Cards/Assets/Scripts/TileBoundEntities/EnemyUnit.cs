@@ -16,6 +16,8 @@ public class EnemyUnit : MonoBehaviour
     public string UnitName;
     public float ManaCost;
     public float Movement;
+    public float MovementPoints;
+    public float ActionPoints;
     public float MaxHealth;
     public float CurrentHealth;
     public float Damage;
@@ -138,7 +140,7 @@ public class EnemyUnit : MonoBehaviour
     {
         //make sure the navigation map generator knows if the unit that is trying to move can fly or not
         NavigationMapgenerator.CurrentUnitisFlying = isFlying;
-        NavigationMapgenerator.GenerateNavigationMap(destination);
+        NavigationMapgenerator.GenerateNavigationMap(destination, TilePosition);
     }
 
     public void TakeDamage(float Damagetaken)
