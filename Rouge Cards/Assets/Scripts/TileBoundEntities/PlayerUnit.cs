@@ -53,7 +53,7 @@ public class PlayerUnit : MonoBehaviour
     {
         UpdateTilePosition();
         isSelected = true;
-        //NavigationMapgenerator.HighlightValidTiles(TilePosition);
+        NavigationMapgenerator.HighlightValidTiles(TilePosition);
     }
     public void UnSelect()
     {

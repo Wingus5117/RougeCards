@@ -13,14 +13,15 @@ public class NavigationMapGenerator : MonoBehaviour
     internal bool CurrentUnitisFlying;
     public TurnManager TurnManager;
 
-    //public Material IndicatorRed;
-    //public Material IndicatorBlue;
-    //public Material IndicatorPurple;
+    public Material IndicatorRed;
+    public Material IndicatorBlue;
+    public Material IndicatorPurple;
 
     private void Start()
     {
         levelgenerator = FindAnyObjectByType<MapManager>();
     }
+
     public void GenerateNavigationMap(TileData destination, TileData startTile)
     {
         currenttileDatas = new List<TileData>();
@@ -103,7 +104,7 @@ public class NavigationMapGenerator : MonoBehaviour
         // once the map is fully done generating reset the flying bollean to flase
         CurrentUnitisFlying = false;
     }
-    /*public void HighlightValidTiles(TileData PlayerTile)
+    public void HighlightValidTiles(TileData PlayerTile)
     {
         PlayerUnit playerUnit = PlayerTile.ObjectOnTile.GetComponent<PlayerUnit>();
         
@@ -122,12 +123,13 @@ public class NavigationMapGenerator : MonoBehaviour
         while (currenttileDatas.Count > 0)
         {
             nexttileDatas.Clear();
-
             
+
             MoveRange--;
             if (MoveRange < 0)
             {
                 currenttileDatas.Clear();
+                HilightAttackTiles(PlayerTile);
                 return;
             }
             
@@ -138,6 +140,19 @@ public class NavigationMapGenerator : MonoBehaviour
 
                 foreach (TileData neighbor in neighbors)
                 {
+                    if (playerUnit.isFlying)
+                    {
+                        nexttileDatas.Add(neighbor);
+                    }
+                    else
+                    {
+                        if (neighbor.Terraintype == TerrainType.Grass)
+                        {
+                            nexttileDatas.Add(neighbor);
+                        }
+                    }
+
+
                     if (!neighbor.IndicatorSet)
                     {
 
@@ -157,16 +172,15 @@ public class NavigationMapGenerator : MonoBehaviour
                                 if (MoveRange >= 0)
                                 {
                                     neighbor.TurnOnIndicator(IndicatorBlue);
+
                                 }
-                                
+
                             }
-                            
+
                         }
-                        
+
+
                     }
-                        
-                        //activate the indicator based on ht emovment and attack range values
-                        nexttileDatas.Add(neighbor);
                     
                 }
             }
@@ -174,11 +188,12 @@ public class NavigationMapGenerator : MonoBehaviour
             currenttileDatas.Clear();
             currenttileDatas.AddRange(nexttileDatas);
         }
-        HilightAttackTiles(PlayerTile);
+        
         // once the map is fully done generating reset the flying bollean to flase
     }
     public void HilightAttackTiles(TileData PlayerTile)
     {
+        
         List<TileData> currenttileDatas = new List<TileData>();
         List<TileData> nexttileDatas = new List<TileData>();
 
@@ -195,6 +210,7 @@ public class NavigationMapGenerator : MonoBehaviour
             AttackRange--;
             if (AttackRange < 0)
             {
+                
                 currenttileDatas.Clear();
                 return;
             }
@@ -203,11 +219,25 @@ public class NavigationMapGenerator : MonoBehaviour
             foreach (TileData tile in currenttileDatas)
             {
                 List<TileData> neighbors = tile.GetNeighbors();
-
+                
                 foreach (TileData neighbor in neighbors)
                 {
+                    if (playerUnit.isFlying)
+                    {
+                        nexttileDatas.Add(neighbor);
+                    }
+                    else
+                    {
+                        if (neighbor.Terraintype == TerrainType.Grass)
+                        {
+                            nexttileDatas.Add(neighbor);
+                        }
+                    }
+                    
+
                     if (!neighbor.IndicatorSet)
                     {
+                        
                         if (AttackRange >= 0)
                         {
                             Debug.Log("RED");
@@ -217,8 +247,6 @@ public class NavigationMapGenerator : MonoBehaviour
 
                     }
 
-                    //activate the indicator based on ht emovment and attack range values
-                    nexttileDatas.Add(neighbor);
 
                 }
             }
@@ -226,7 +254,7 @@ public class NavigationMapGenerator : MonoBehaviour
             currenttileDatas.Clear();
             currenttileDatas.AddRange(nexttileDatas);
         }
-    }*/
+    }
 
     public void clearalltiles()
     {
@@ -240,8 +268,8 @@ public class NavigationMapGenerator : MonoBehaviour
                     tile.NavigationValue = 0;
                     tile.NavigationSet = false;
 
-                    //tile.WalkIndicator.gameObject.SetActive(false);
-                    //tile.IndicatorSet = false;
+                    tile.WalkIndicator.gameObject.SetActive(false);
+                    tile.IndicatorSet = false;
 
                 }
             }

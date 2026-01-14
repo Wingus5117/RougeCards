@@ -5,8 +5,8 @@ public class PlayerManager : MonoBehaviour
 {
     public GameObject SelectedObject;
     public NavigationMapGenerator NavigationMapGenerator;
-    //public Material WalkIndicatorMaterial;
-    //public Material BothIndicatorMaterial;
+    public Material WalkIndicatorMaterial;
+    public Material BothIndicatorMaterial;
     // Update is called once per frame
     void Update()
     {
@@ -66,11 +66,13 @@ public class PlayerManager : MonoBehaviour
                             }
                         }
                         //if the tile is a valid movement location try to move to it and make the tile the selected object
-                        
-                        gameplayobject.Move(data);
-                        gameplayobject.isSelected = false;
-                        SelectedObject = hit.collider.gameObject;
+                        if (data.WalkIndicator.sharedMaterial == WalkIndicatorMaterial || data.WalkIndicator.sharedMaterial == BothIndicatorMaterial)
+                        {
+                            gameplayobject.Move(data);
+                            gameplayobject.isSelected = false;
+                            SelectedObject = hit.collider.gameObject;
 
+                        }
 
                         
                         

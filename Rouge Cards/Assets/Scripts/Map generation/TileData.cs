@@ -18,8 +18,8 @@ public class TileData : MonoBehaviour
 
     internal MapManager Mapmanager;
     private List<TileData> _tiles = new List<TileData>();
-    //internal bool IndicatorSet;
-    //public Renderer WalkIndicator;
+    internal bool IndicatorSet;
+    public Renderer WalkIndicator;
 
     public void OnEnable()
     {
@@ -67,7 +67,7 @@ public class TileData : MonoBehaviour
         return result;
     }
 
-    /*public void TurnOnIndicator(Material IndicatorMaterial)
+    public void TurnOnIndicator(Material IndicatorMaterial)
     {
         //Red, attack
         //Blue, move
@@ -75,7 +75,7 @@ public class TileData : MonoBehaviour
         IndicatorSet = true;
         WalkIndicator.gameObject.SetActive(true);
         WalkIndicator.material = IndicatorMaterial;
-    }*/
+    }
 
 }
 public enum TerrainType
