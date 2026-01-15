@@ -149,6 +149,8 @@ public class PlayerManager : MonoBehaviour
 
     public void InitiateCombat(EnemyUnit Enemy, PlayerUnit Player)
     {
+        Player.MovementPoints = 0;
+        Player.ActionPoints--;
         Enemy.TakeDamage(Player.Damage);
     }
 }

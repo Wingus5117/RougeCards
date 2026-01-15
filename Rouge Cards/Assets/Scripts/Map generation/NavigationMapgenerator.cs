@@ -129,7 +129,11 @@ public class NavigationMapGenerator : MonoBehaviour
             if (MoveRange < 0)
             {
                 currenttileDatas.Clear();
-                HilightAttackTiles(PlayerTile);
+                if (playerUnit.ActionPoints > 0)
+                {
+                    HilightAttackTiles(PlayerTile);
+                }
+                
                 return;
             }
             
@@ -148,7 +152,18 @@ public class NavigationMapGenerator : MonoBehaviour
                     {
                         if (neighbor.Terraintype == TerrainType.Grass)
                         {
-                            nexttileDatas.Add(neighbor);
+                            if (neighbor.ObjectOnTile != null)
+                            {
+                                if (neighbor.ObjectOnTile.tag != "EnemyUnit")
+                                {
+                                    nexttileDatas.Add(neighbor);
+                                }
+                            }
+                            else
+                            {
+                                nexttileDatas.Add(neighbor);
+                            }
+                           
                         }
                     }
 
@@ -230,7 +245,17 @@ public class NavigationMapGenerator : MonoBehaviour
                     {
                         if (neighbor.Terraintype == TerrainType.Grass)
                         {
-                            nexttileDatas.Add(neighbor);
+                            if (neighbor.ObjectOnTile != null)
+                            {
+                                if (neighbor.ObjectOnTile.tag != "EnemyUnit")
+                                {
+                                    nexttileDatas.Add(neighbor);
+                                }
+                            }
+                            else
+                            {
+                                nexttileDatas.Add(neighbor);
+                            }
                         }
                     }
                     
@@ -240,14 +265,10 @@ public class NavigationMapGenerator : MonoBehaviour
                         
                         if (AttackRange >= 0)
                         {
-                            Debug.Log("RED");
+                            
                             neighbor.TurnOnIndicator(IndicatorRed);
                         }
-
-
                     }
-
-
                 }
             }
             // Move to next "layer"
