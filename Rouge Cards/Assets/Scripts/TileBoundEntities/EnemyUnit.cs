@@ -155,4 +155,9 @@ public class EnemyUnit : MonoBehaviour
     {
         Destroy(gameObject, 1);
     }
+    public void NewEnemyTurn()
+    {
+        MovementPoints = Movement;
+        ActionPoints = 1;
+    }
 }

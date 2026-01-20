@@ -1,8 +1,9 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem.HID;
 public class PlayerUnit : MonoBehaviour
 {
     public bool isSelected;
@@ -158,5 +159,11 @@ public class PlayerUnit : MonoBehaviour
     public void OnDeath()
     {
         Destroy(gameObject, 1);
+    }
+
+    public void NewPlayerTurn()
+    {
+        MovementPoints = Movement;
+        ActionPoints = 1;
     }
 }

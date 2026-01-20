@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public NavigationMapGenerator NavigationMapGenerator;
     public Material WalkIndicatorMaterial;
     public Material BothIndicatorMaterial;
+    public TurnManager TurnManager;
     // Update is called once per frame
     void Update()
     {
@@ -30,41 +31,28 @@ public class PlayerManager : MonoBehaviour
                 //if we hit a tile get its data
                 if (hit.collider.gameObject.tag == "Tile")
                 {
-                    //Clear Unit Indicators
-                    
-
 
                     TileData data = hit.collider.gameObject.GetComponent<TileData>();
                     
                     // if we are not currently selected on something make the Tile the selected object
-                    if (SelectedObject == null)
+                    if (SelectedObject == null || SelectedObject.tag == "EnemyUnit")
                     {
                         SelectedObject = hit.collider.gameObject;
                     }
+
+                    // if it is not our turn we just make the tile the selected object and then stop
+                    if (TurnManager.isEnemyTurn)
+                    {
+                        return;
+                    }
+
                     // if we currently have a player unit selected that means we try to move to that tile
                     else if (SelectedObject.tag == "PlayerUnit")
                     {
                         // make sure that the selected tile is a valid target for movement
-                        
+
                         PlayerUnit gameplayobject = SelectedObject.GetComponent<PlayerUnit>();
-                        // if the player unit can fly let them land on any tile exept those with enemies or mountian tiles
-                        if (gameplayobject.isFlying)
-                        {
-                            if (data.Terraintype == TerrainType.Mountain || data.ObjectOnTile != null)
-                            {
-                                Debug.Log("Target Tile is not a valid target");
-                                return;
-                            }
-                        }
-                        //if the player unit CANNOT fly let them land on any tile exept those with enemies,mountain or water tiles
-                        else
-                        {
-                            if (data.Terraintype == TerrainType.Mountain || data.Terraintype == TerrainType.Water || data.ObjectOnTile != null)
-                            {
-                                Debug.Log("Target Tile is not a valid target");
-                                return;
-                            }
-                        }
+
                         //if the tile is a valid movement location try to move to it and make the tile the selected object
                         if (data.WalkIndicator.sharedMaterial == WalkIndicatorMaterial || data.WalkIndicator.sharedMaterial == BothIndicatorMaterial)
                         {
@@ -73,9 +61,12 @@ public class PlayerManager : MonoBehaviour
                             SelectedObject = hit.collider.gameObject;
 
                         }
-
-                        
-                        
+                        // if we cant move to the target set it as the selected object
+                        else
+                        {
+                            gameplayobject.isSelected = false;
+                            SelectedObject = hit.collider.gameObject;
+                        }
                     }
                 }
                 // if we click on a player unit at any time make the unit the selected object
@@ -107,14 +98,13 @@ public class PlayerManager : MonoBehaviour
                     //Clear Unit Indicators
                     NavigationMapGenerator.clearalltiles();
 
-
-                    // if we are selected onto nothing or a tile then make the enemy the selected object 
-                    if (SelectedObject == null || SelectedObject.gameObject.tag == "Tile")
+                    // if we are not selected onto anything make the enemy unit the selected opbject
+                    if (SelectedObject == null)
                     {
-                        // do nothing
+                        SelectedObject = hit.collider.gameObject;
                     }
-                    // if we are currently selected onto a player unit and click on an enemy we need to check if we are in attack range and then initiate combat
-                    else if (SelectedObject.tag == "PlayerUnit")
+                    // if we are currently selected onto a player unit and click on an enemy we need to check if we are in attack range and then initiate combat (Make sure it is our turn)
+                    if (SelectedObject.tag == "PlayerUnit" && TurnManager.isPlayerTurn)
                     {
 
                         // get the info of the enemy we click on 
@@ -134,9 +124,6 @@ public class PlayerManager : MonoBehaviour
                         {
                             Debug.Log("Enemy is out of range");
                         }
-
-                        
-                        
                     }
 
                     // make the enemy to currently selected object
