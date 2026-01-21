@@ -18,7 +18,7 @@ public class TileData : MonoBehaviour
 
     internal MapManager Mapmanager;
     private List<TileData> _tiles = new List<TileData>();
-    internal bool IndicatorSet;
+    public bool IndicatorSet;
     public Renderer WalkIndicator;
 
     public void OnEnable()

@@ -25,7 +25,7 @@ public class PlayerUnit : MonoBehaviour
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         UpdateTilePosition();
         NavigationMapgenerator = FindAnyObjectByType<NavigationMapGenerator>();

@@ -444,6 +444,7 @@
 "Assets/Scripts/Player-Enemy/EnemyManager.cs"
 "Assets/Scripts/Player-Enemy/Player Manager.cs"
 "Assets/Scripts/TileBoundEntities/EnemyUnit.cs"
+"Assets/Scripts/TileBoundEntities/PlayerBuilding.cs"
 "Assets/Scripts/TileBoundEntities/PlayerUnit.cs"
 -langversion:9.0
 /deterministic

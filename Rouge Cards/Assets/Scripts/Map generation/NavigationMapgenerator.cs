@@ -111,12 +111,14 @@ public class NavigationMapGenerator : MonoBehaviour
         List<TileData> currenttileDatas = new List<TileData>();
         List<TileData> nexttileDatas = new List<TileData>();
 
+        List<TileData> SetTiles = new List<TileData>();
+
         // set the tile's indicator the player is on to purple
         PlayerTile.TurnOnIndicator(IndicatorBlue);
         PlayerTile.IndicatorSet = true;
 
         currenttileDatas.Add(PlayerTile);
-
+        SetTiles.Add(PlayerTile);
        
         float MoveRange = PlayerTile.ObjectOnTile.GetComponent<PlayerUnit>().MovementPoints;
 
@@ -131,7 +133,7 @@ public class NavigationMapGenerator : MonoBehaviour
                 currenttileDatas.Clear();
                 if (playerUnit.ActionPoints > 0)
                 {
-                    HilightAttackTiles(PlayerTile);
+                    HilightAttackTiles(PlayerTile, SetTiles);
                 }
                 
                 return;
@@ -177,6 +179,7 @@ public class NavigationMapGenerator : MonoBehaviour
                             if (MoveRange >= 0)
                             {
                                 neighbor.TurnOnIndicator(IndicatorBlue);
+                                SetTiles.Add(neighbor);
                             }
                         }
                         if (neighbor.Terraintype == TerrainType.Water)
@@ -187,6 +190,7 @@ public class NavigationMapGenerator : MonoBehaviour
                                 if (MoveRange >= 0)
                                 {
                                     neighbor.TurnOnIndicator(IndicatorBlue);
+                                    SetTiles.Add(neighbor);
 
                                 }
 
@@ -206,75 +210,54 @@ public class NavigationMapGenerator : MonoBehaviour
         
         // once the map is fully done generating reset the flying bollean to flase
     }
-    public void HilightAttackTiles(TileData PlayerTile)
+    public void HilightAttackTiles(TileData PlayerTile, List<TileData> SetTiles)
     {
-        
-        List<TileData> currenttileDatas = new List<TileData>();
-        List<TileData> nexttileDatas = new List<TileData>();
 
-        PlayerUnit playerUnit = PlayerTile.ObjectOnTile.GetComponent<PlayerUnit>();
-
-        float AttackRange = playerUnit.AttackRange + playerUnit.MovementPoints;
-        currenttileDatas.Add(PlayerTile);
-
-        while (currenttileDatas.Count > 0)
+        foreach (TileData tileData in SetTiles)
         {
-            nexttileDatas.Clear();
+            List<TileData> currenttileDatas = new List<TileData>();
+            List<TileData> nexttileDatas = new List<TileData>();
 
+            PlayerUnit playerUnit = PlayerTile.ObjectOnTile.GetComponent<PlayerUnit>();
 
-            AttackRange--;
-            if (AttackRange < 0)
+            float AttackRange = playerUnit.AttackRange;
+
+            currenttileDatas.Add(tileData);
+
+            while (currenttileDatas.Count > 0)
             {
-                
-                currenttileDatas.Clear();
-                return;
-            }
+                nexttileDatas.Clear();
 
 
-            foreach (TileData tile in currenttileDatas)
-            {
-                List<TileData> neighbors = tile.GetNeighbors();
-                
-                foreach (TileData neighbor in neighbors)
+                AttackRange--;
+                if (AttackRange < 0)
                 {
-                    if (playerUnit.isFlying)
+                    currenttileDatas.Clear();
+                    break;
+                }
+
+
+                foreach (TileData tile in currenttileDatas)
+                {
+                    List<TileData> neighbors = tile.GetNeighbors();
+
+                    foreach (TileData neighbor in neighbors)
                     {
                         nexttileDatas.Add(neighbor);
-                    }
-                    else
-                    {
-                        if (neighbor.Terraintype == TerrainType.Grass)
-                        {
-                            if (neighbor.ObjectOnTile != null)
-                            {
-                                if (neighbor.ObjectOnTile.tag != "EnemyUnit")
-                                {
-                                    nexttileDatas.Add(neighbor);
-                                }
-                            }
-                            else
-                            {
-                                nexttileDatas.Add(neighbor);
-                            }
-                        }
-                    }
-                    
 
-                    if (!neighbor.IndicatorSet)
-                    {
-                        
-                        if (AttackRange >= 0)
+                        if (!neighbor.IndicatorSet)
                         {
-                            
                             neighbor.TurnOnIndicator(IndicatorRed);
                         }
                     }
                 }
+                // Move to next "layer"
+                currenttileDatas.Clear();
+                currenttileDatas.AddRange(nexttileDatas);
+                
             }
-            // Move to next "layer"
-            currenttileDatas.Clear();
-            currenttileDatas.AddRange(nexttileDatas);
         }
+        
     }
 
     public void clearalltiles()
