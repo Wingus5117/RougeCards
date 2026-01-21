@@ -2671,8 +2671,8 @@ MonoBehaviour:
   isFlying: 0
   UnitName: Kistune
   ManaCost: 1
-  Movement: 1
-  MovementPoints: 1
+  Movement: 3
+  MovementPoints: 3
   ActionPoints: 1
   MaxHealth: 5
   CurrentHealth: 5
@@ -2765,7 +2765,7 @@ Transform:
   m_GameObject: {fileID: 262090191}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: 7}
+  m_LocalPosition: {x: 5, y: 1, z: 4}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5180,6 +5180,7 @@ MonoBehaviour:
   GrassMaterial: {fileID: 2100000, guid: 5359338562e7baf4eabf975591af623f, type: 2}
   MountainMaterial: {fileID: 2100000, guid: bde0b99a508eb194e9c8748b4bf28658, type: 2}
   WaterMaterial: {fileID: 2100000, guid: 630d6c7156b7dbe44b8e2c4ac86b84dd, type: 2}
+  ManaMaterial: {fileID: 0}
   TileAmount: 0
   Tiles_Sorted: 0
   CurrentTileMapData: {fileID: 0}
@@ -11761,7 +11762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1203715816
 BoxCollider:
   m_ObjectHideFlags: 0

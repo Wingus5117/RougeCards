@@ -22,7 +22,7 @@ public class MapManager : MonoBehaviour
     public Material GrassMaterial;
     public Material MountainMaterial;
     public Material WaterMaterial;
-
+    public Material ManaMaterial;
 
     public List<List<GameObject>> TileList_Width = new List<List<GameObject>>();
     public int TileAmount = 0;
@@ -70,7 +70,7 @@ public class MapManager : MonoBehaviour
 
                         Renderer Mesh = tile.GetComponent<Renderer>();
                         if (Mesh.sharedMaterial == GrassMaterial)
-                        { 
+                        {
                             tileData.Terraintype = TerrainType.Grass;
                         }
                         else if (Mesh.sharedMaterial == WaterMaterial)
@@ -80,6 +80,10 @@ public class MapManager : MonoBehaviour
                         else if (Mesh.sharedMaterial == MountainMaterial)
                         {
                             tileData.Terraintype = TerrainType.Mountain;
+                        }
+                        else if (Mesh.sharedMaterial == ManaMaterial)
+                        {
+                            tileData.Terraintype = TerrainType.Mana;
                         }
 
                     }

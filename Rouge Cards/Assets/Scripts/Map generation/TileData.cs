@@ -69,9 +69,6 @@ public class TileData : MonoBehaviour
 
     public void TurnOnIndicator(Material IndicatorMaterial)
     {
-        //Red, attack
-        //Blue, move
-        //Purple, both
         IndicatorSet = true;
         WalkIndicator.gameObject.SetActive(true);
         WalkIndicator.material = IndicatorMaterial;

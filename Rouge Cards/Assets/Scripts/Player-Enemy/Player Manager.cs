@@ -54,7 +54,7 @@ public class PlayerManager : MonoBehaviour
                         PlayerUnit gameplayobject = SelectedObject.GetComponent<PlayerUnit>();
 
                         //if the tile is a valid movement location try to move to it and make the tile the selected object
-                        if (data.WalkIndicator.sharedMaterial == WalkIndicatorMaterial || data.WalkIndicator.sharedMaterial == BothIndicatorMaterial)
+                        if (data.WalkIndicator.sharedMaterial == WalkIndicatorMaterial)
                         {
                             gameplayobject.Move(data);
                             gameplayobject.isSelected = false;

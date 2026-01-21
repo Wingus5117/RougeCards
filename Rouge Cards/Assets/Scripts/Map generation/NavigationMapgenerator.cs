@@ -152,7 +152,7 @@ public class NavigationMapGenerator : MonoBehaviour
                     }
                     else
                     {
-                        if (neighbor.Terraintype == TerrainType.Grass)
+                        if (neighbor.Terraintype == TerrainType.Grass || neighbor.Terraintype == TerrainType.Mana)
                         {
                             if (neighbor.ObjectOnTile != null)
                             {
@@ -165,39 +165,53 @@ public class NavigationMapGenerator : MonoBehaviour
                             {
                                 nexttileDatas.Add(neighbor);
                             }
-                           
                         }
                     }
-
 
                     if (!neighbor.IndicatorSet)
                     {
 
-                        if (neighbor.Terraintype == TerrainType.Grass)
+                        if (neighbor.Terraintype == TerrainType.Grass || neighbor.Terraintype == TerrainType.Mana )
                         {
-                            // can move to tile but not attack
+
                             if (MoveRange >= 0)
                             {
-                                neighbor.TurnOnIndicator(IndicatorBlue);
-                                SetTiles.Add(neighbor);
+                                if (neighbor.ObjectOnTile == null)
+                                {
+                                    neighbor.TurnOnIndicator(IndicatorBlue);
+                                    SetTiles.Add(neighbor);
+                                }
+                                else if (neighbor.ObjectOnTile.tag != "EnemyUnit")
+                                {
+                                    neighbor.TurnOnIndicator(IndicatorBlue);
+                                    SetTiles.Add(neighbor);
+                                }
+                                
                             }
                         }
                         if (neighbor.Terraintype == TerrainType.Water)
                         {
                             if (playerUnit.isFlying)
                             {
-                                // can move to tile but not attack
+                                
                                 if (MoveRange >= 0)
                                 {
-                                    neighbor.TurnOnIndicator(IndicatorBlue);
-                                    SetTiles.Add(neighbor);
+                                    if (neighbor.ObjectOnTile == null)
+                                    {
+                                        neighbor.TurnOnIndicator(IndicatorBlue);
+                                        SetTiles.Add(neighbor);
+                                    }
+                                    else if (neighbor.ObjectOnTile.tag != "EnemyUnit")
+                                    {
+                                        neighbor.TurnOnIndicator(IndicatorBlue);
+                                        SetTiles.Add(neighbor);
+                                    }
 
                                 }
 
                             }
 
                         }
-
 
                     }
                     
