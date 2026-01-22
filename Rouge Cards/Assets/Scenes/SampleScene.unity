@@ -2765,7 +2765,7 @@ Transform:
   m_GameObject: {fileID: 262090191}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 1, z: 4}
+  m_LocalPosition: {x: 8, y: 1, z: 1}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11850,7 +11850,7 @@ Transform:
   m_GameObject: {fileID: 1203715814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: 7}
+  m_LocalPosition: {x: 1, y: 1, z: 8}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11873,8 +11873,8 @@ MonoBehaviour:
   UnitName: Oni
   ManaCost: 1
   Movement: 4
-  MovementPoints: 0
-  ActionPoints: 0
+  MovementPoints: 4
+  ActionPoints: 1
   MaxHealth: 5
   CurrentHealth: 5
   Damage: 10
@@ -22318,7 +22318,7 @@ SceneRoots:
   - {fileID: 138071289}
   - {fileID: 560180204}
   - {fileID: 262090196}
+  - {fileID: 1408460043}
   - {fileID: 1203715819}
   - {fileID: 499161333}
   - {fileID: 251911688}
-  - {fileID: 1408460043}
